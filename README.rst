@@ -28,9 +28,9 @@ Requirements
 
 Time2Pull uses the following softwares:
 
-  - git
-  - python 3
-  - PyQt5
+- git
+- python 3
+- PyQt5
 
 
 Installation
