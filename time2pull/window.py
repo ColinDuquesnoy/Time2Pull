@@ -1,6 +1,7 @@
 """
 This module contains the main window implementation.
 """
+import functools
 import os
 from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimedia
 import sys
@@ -10,6 +11,14 @@ from time2pull.icons import get_status_icon, get_tray_icon
 from time2pull.forms.main_window_ui import Ui_MainWindow
 from time2pull.settings import Settings
 from time2pull.worker import WorkerThread
+
+
+def ensure_visible(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwds):
+        self.restore()
+        return func(self, *args, **kwds)
+    return wrapper
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -42,6 +51,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButtonRefresh.setEnabled(bool(self.listWidgetRepos.count()))
         # run status refresh
         self.on_refresh_requested()
+
+        # check for git
+        if os.system('git --version') != 0:
+            self.show()
+            QtWidgets.QMessageBox.warning(
+                self, 'Git not found',
+                'Cannot find git, please add it to your PATH')
 
     def setup_tray_icon_mnu(self):
         self.tray_icon_menu = QtWidgets.QMenu(self)
@@ -181,6 +197,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.update_tray_icon()
 
     @QtCore.pyqtSlot()
+    @ensure_visible
     def on_pushButtonAdd_clicked(self):
         path = QtWidgets.QFileDialog.getExistingDirectory(
             self, 'Select a repository')
@@ -289,3 +306,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot(bool)
     def on_actionHide_on_startup_toggled(self, checked):
         Settings().hide_on_startup = checked
+
+    @QtCore.pyqtSlot()
+    @ensure_visible
+    def on_actionRefresh_triggered(self):
+        self.on_refresh_requested()
