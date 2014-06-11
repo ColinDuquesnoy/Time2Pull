@@ -44,7 +44,6 @@ def get_tray_icon(is_behind):
         return base_icon
 
 
-
 if __name__ == '__main__':
     # example: show all possible combination in an example list
     from PyQt5 import QtWidgets

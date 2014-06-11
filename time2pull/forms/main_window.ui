@@ -120,6 +120,25 @@
     <string>About Time2Pull</string>
    </property>
   </action>
+  <action name="actionRestore">
+   <property name="text">
+    <string>Restore window</string>
+   </property>
+   <property name="toolTip">
+    <string>Restore main window</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="toolTip">
+    <string>View user manual</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="resources.qrc"/>

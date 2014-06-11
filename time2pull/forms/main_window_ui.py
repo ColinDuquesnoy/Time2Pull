@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Wed Jun 11 18:40:11 2014
-#      by: PyQt5 UI code generator 5.2.1
+# Created: Wed Jun 11 21:23:52 2014
+#      by: PyQt5 UI code generator 5.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -58,6 +58,10 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon.fromTheme("info")
         self.actionAbout.setIcon(icon)
         self.actionAbout.setObjectName("actionAbout")
+        self.actionRestore = QtWidgets.QAction(MainWindow)
+        self.actionRestore.setObjectName("actionRestore")
+        self.actionHelp = QtWidgets.QAction(MainWindow)
+        self.actionHelp.setObjectName("actionHelp")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -71,5 +75,10 @@ class Ui_MainWindow(object):
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
         self.actionAbout.setToolTip(_translate("MainWindow", "About Time2Pull"))
+        self.actionRestore.setText(_translate("MainWindow", "Restore window"))
+        self.actionRestore.setToolTip(_translate("MainWindow", "Restore main window"))
+        self.actionHelp.setText(_translate("MainWindow", "Help"))
+        self.actionHelp.setToolTip(_translate("MainWindow", "View user manual"))
+        self.actionHelp.setShortcut(_translate("MainWindow", "F1"))
 
 from . import resources_rc

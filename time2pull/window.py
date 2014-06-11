@@ -3,6 +3,7 @@ This module contains the main window implementation.
 """
 import os
 from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimedia
+import sys
 from time2pull import __version__
 from time2pull.constants import RemoteStatus
 from time2pull.icons import get_status_icon, get_tray_icon
@@ -51,9 +52,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.labelRefresh.setMovie(self.movie)
         # Tray icon
         self.tray_icon_menu = QtWidgets.QMenu(self)
+        self.tray_icon_menu.addAction(self.actionRestore)
+        self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
+        self.tray_icon_menu.addSeparator()
+        self.tray_icon_menu.addAction(self.actionHelp)
         self.tray_icon_menu.addAction(self.actionAbout)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionQuit)
+        self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
         self.tray_icon = QtWidgets.QSystemTrayIcon(self)
         self.tray_icon.setIcon(get_tray_icon(False))
         self.tray_icon.setContextMenu(self.tray_icon_menu)
@@ -67,6 +73,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButtonRefresh.clicked.connect(self.on_refresh_requested)
         self.listWidgetRepos.itemSelectionChanged.connect(
             self.on_selection_changed)
+        self.actionRestore.triggered.connect(self.restore)
 
     def closeEvent(self, event):
         if self.tray_icon.isVisible():
@@ -178,19 +185,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.alert(repo)
         self.update_tray_icon()
 
+    def restore(self):
+        self.show()
+        QtWidgets.QApplication.instance().setActiveWindow(self)
+
     @QtCore.pyqtSlot(object)
     def on_icon_activated(self, reason):
-        if reason in (QtWidgets.QSystemTrayIcon.Trigger,
-                      QtWidgets.QSystemTrayIcon.DoubleClick):
-            self.show()
-            QtWidgets.QApplication.instance().setActiveWindow(self)
+        if sys.platform == 'darwin':
+            reasons = []
+        else:
+            reasons = (QtWidgets.QSystemTrayIcon.Trigger,
+                       QtWidgets.QSystemTrayIcon.DoubleClick)
+        if reason in reasons:
+            self.restore()
         elif reason == QtWidgets.QSystemTrayIcon.MiddleClick:
             self.showMessage()
 
     @QtCore.pyqtSlot()
     def on_message_clicked(self):
-        self.show()
-        QtWidgets.QApplication.instance().setActiveWindow(self)
+        self.restore()
 
     @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
