@@ -1,21 +1,24 @@
 Time2Pull (Git repository monitor)
 ==================================
 
-Time2Pull is small application that monitor your git repositories and warn you when the remote changed. This
-is particularly useful if you're working with a centralised workflow where all developpers pull from a central repository.
+Time2Pull is small application that monitor your git repositories and warn you when the remote changed (e.g. one of your colleague just pushed to the repository).
+
+This is particularly useful if you're working with a centralised workflow where all developpers pull and push from a central repository.
 
 
-Monitoring, how do we do?
-=========================
+How does it work?
+=================
 
-Every minutes, the application will execute the two following git commands to detect remote status changes on every
+First you add the paths to the local repositories you would like to monitor.
+
+Then, every minutes, the application will execute the two following git commands to detect remote status changes on every
 repositories you've added::
 
   $ git remote update
   $ git status -uno
   
 If one of the repository is behind remote/origin, the application will warn you by displaying a message in the system tray
-and by playing an alert sound.
+and by playing an alert sound. The application also display the repository status (uncommitted changes, pushable commits,...).
 
 License
 =======
