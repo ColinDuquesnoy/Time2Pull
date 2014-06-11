@@ -100,8 +100,17 @@ Known issues
   This seems to be a PyQt5 bug. You will need the top icons shell extension to
   view the tray icon.
 
-- Alert sound not playing on some GNU/Linux distrubitons:
 
-  There seem to be a problem with QtMultimedia on GNU/Linux. There is no known
-  workaround. If you found a solution, please open a new issue or, better,
-  submit a pull request!
+Screenshots
+===========
+
+Main Window:
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
+    :align: center
+
+Overlays and their meanings:
+
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
+    :align: center
