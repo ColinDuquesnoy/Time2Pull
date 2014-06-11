@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Wed Jun 11 22:59:40 2014
-#      by: PyQt5 UI code generator 5.3
+# Created: Wed Jun 11 23:23:43 2014
+#      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -98,11 +98,15 @@ class Ui_MainWindow(object):
         self.actionHelp.setToolTip(_translate("MainWindow", "View user manual"))
         self.actionHelp.setShortcut(_translate("MainWindow", "F1"))
         self.actionRefresh.setText(_translate("MainWindow", "Refresh"))
+        self.actionRefresh.setShortcut(_translate("MainWindow", "F5"))
         self.actionAdd.setText(_translate("MainWindow", "Add"))
         self.actionAdd.setToolTip(_translate("MainWindow", "Add a new repository to monitor"))
+        self.actionAdd.setShortcut(_translate("MainWindow", "Ctrl+A"))
         self.actionRemove.setText(_translate("MainWindow", "Remove"))
         self.actionRemove.setToolTip(_translate("MainWindow", "Remove the selected repository from the monitoring list"))
+        self.actionRemove.setShortcut(_translate("MainWindow", "Ctrl+R"))
         self.actionHide_on_startup.setText(_translate("MainWindow", "Hide on startup"))
         self.actionHide_on_startup.setToolTip(_translate("MainWindow", "Hide the main window when the application starts."))
+        self.actionHide_on_startup.setShortcut(_translate("MainWindow", "Ctrl+H"))
 
 from . import resources_rc

@@ -149,6 +149,9 @@
    <property name="text">
     <string>Refresh</string>
    </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
   </action>
   <action name="actionAdd">
    <property name="icon">
@@ -160,6 +163,9 @@
    </property>
    <property name="toolTip">
     <string>Add a new repository to monitor</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
   <action name="actionRemove">
@@ -173,6 +179,9 @@
    <property name="toolTip">
     <string>Remove the selected repository from the monitoring list</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
   </action>
   <action name="actionHide_on_startup">
    <property name="checkable">
@@ -183,6 +192,9 @@
    </property>
    <property name="toolTip">
     <string>Hide the main window when the application starts.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
  </widget>
