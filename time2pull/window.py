@@ -5,7 +5,7 @@ import os
 from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimedia
 import sys
 from time2pull import __version__
-from time2pull.constants import RemoteStatus
+from time2pull.constants import RemoteStatus, TrayIconType
 from time2pull.icons import get_status_icon, get_tray_icon
 from time2pull.forms.main_window_ui import Ui_MainWindow
 from time2pull.settings import Settings
@@ -53,10 +53,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Tray icon
         self.tray_icon_menu = QtWidgets.QMenu(self)
         self.tray_icon_menu.addAction(self.actionRestore)
-        self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
+        self.tray_icon_menu.addSeparator()
+        self.actionIconGroup = QtWidgets.QActionGroup(self)
+        self.actionIconGroup.triggered.connect(self.on_tray_icon_style_triggered)
+        for title in ['Light icon', 'Dark icon']:
+            action = QtWidgets.QAction(title, self)
+            action.setCheckable(True)
+            self.actionIconGroup.addAction(action)
+        self.actionIconGroup.actions()[int(TrayIconType.light)].setChecked(
+            Settings().tray_icon_type == TrayIconType.light)
+        self.actionIconGroup.actions()[int(TrayIconType.dark)].setChecked(
+            Settings().tray_icon_type == TrayIconType.dark)
+        mnu = QtWidgets.QMenu(self)
+        mnu.setTitle('Tray icon')
+        mnu.addActions(self.actionIconGroup.actions())
+        self.tray_icon_menu.addMenu(mnu)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionHelp)
         self.tray_icon_menu.addAction(self.actionAbout)
+        self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionQuit)
         self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
@@ -220,3 +235,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             '\n'
             'Author: Colin Duquesnoy\n'
             'Version: %s' % __version__)
+
+    def on_tray_icon_style_triggered(self, action):
+        ltext = action.text().lower()
+        settings = Settings()
+        settings.tray_icon_type = (
+            TrayIconType.dark if 'dark' in ltext else TrayIconType.light)
+        self.update_tray_icon()
