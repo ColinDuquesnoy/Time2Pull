@@ -26,10 +26,22 @@ by displaying a message in the system tray and by playing an alert sound.
 The application also display repository status (uncommitted changes,
 pushable commits,...) through the icons and their overlays.
 
+
+Features
+========
+
+- cross platform: run on Windows, Mac OSX and GNU/Linux
+- free and open source, built upon FOSS technologies (Python, Qt, Git)
+- detects pullable commits and warns you!
+- detects pushable commits (just for information)
+- detects uncommitted changes (just for information)
+- nice and explicit icon overlays for each state
+- you can choose between a dark and a white tray icon for a better integration with your desktop
+
 License
 =======
 
-Time2Pull is an open source application licensed under the GPL v3.
+Time2Pull is a free open source application licensed under the GPL v3.
 
 
 Requirements
@@ -37,8 +49,8 @@ Requirements
 
 Time2Pull uses the following softwares:
 
-- git
-- python 3
+- Git
+- Python 3 (>= 3.4)
 - PyQt5
 
 
