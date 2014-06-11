@@ -2,7 +2,8 @@
 This module helps manage overlayed icons.
 """
 from PyQt5 import QtCore, QtGui
-from time2pull.constants import RemoteStatus
+from time2pull.constants import RemoteStatus, TrayIconType
+from time2pull.settings import Settings
 
 
 def get_status_icon(has_local_changes=False, status=RemoteStatus.up_to_date,
@@ -27,7 +28,11 @@ def get_status_icon(has_local_changes=False, status=RemoteStatus.up_to_date,
 
 
 def get_app_icon(is_behind):
-    base_icon = QtGui.QIcon(':/time2pull/icons/git-light.png')
+    icons = {
+        TrayIconType.light: ':/time2pull/icons/git-light.png',
+        TrayIconType.dark: ':/time2pull/icons/git-dark.png'
+    }
+    base_icon = QtGui.QIcon(icons[Settings().tray_icon_type])
     overlay_icon = QtGui.QIcon(':/time2pull/icons/Download.png')
     if is_behind:
         icon_pixmap = base_icon.pixmap(QtCore.QSize(64, 64))

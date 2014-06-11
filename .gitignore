@@ -55,3 +55,6 @@ docs/_build/
 # Pycharm
 .idea
 
+# Mac OSX craps
+.DS_Store
+

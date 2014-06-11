@@ -1,11 +1,16 @@
 """
 Contains the application constans and enumerations
 """
-from enum import Enum
+from enum import IntEnum
 
 
-class RemoteStatus(Enum):
-    up_to_date = -1
-    behind = 0
-    ahead = 1
-    diverged = 2
+class RemoteStatus(IntEnum):
+    up_to_date = 0
+    behind = 1
+    ahead = 2
+    diverged = 3
+
+
+class TrayIconType(IntEnum):
+    light = 0
+    dark = 1
