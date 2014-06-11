@@ -71,6 +71,13 @@ You will need to install from source (or from pypi).
 
     sudo pip3 install .
   
+  
+Known issues
+-------------
+
+1) Tray icon does not show on gnome shell:
+
+  Yes, this is a PyQt5 bug. You will need the top icons shell extension to view the tray icon.
 
 
 
