@@ -75,7 +75,10 @@ You will need to install from source (or from pypi).
 
     sudo pip3 install Time2Pull
   
-  
+3) run the software from your application menu or from the command line::
+
+    Time2Pull
+
 Known issues
 ============
 
