@@ -2,7 +2,7 @@ Time2Pull
 =========
 
 Time2Pull is small application that monitors your local git repositories and
-warns you when a remote got updated. It's time to pull!
+warns you when a remote got updated, i.e. *it's time to pull!*
 
 This is particularly useful if you're working with a centralised workflow
 (where all developers pull and push from a central repository) and want to
