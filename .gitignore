@@ -58,3 +58,6 @@ docs/_build/
 # Mac OSX craps
 .DS_Store
 
+# Shinx build
+_build
+
