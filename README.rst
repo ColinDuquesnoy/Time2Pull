@@ -12,19 +12,17 @@ be quickly notified anytime the remote got updated.
 How does it work?
 =================
 
-First you add the paths to the local repositories you would like to monitor.
+First, you add the paths to the local repositories you would like to monitor.
 
-Then, every minutes, the application will execute the two following git
-commands to detect remote status changes on every repositories you've added::
+Then, the application will scan your the added repositories every minutes to detect remote status changes.
+
+The scan simply consists in calling the two following git commands and parsing their output::
 
   $ git remote update
   $ git status -uno
   
-If one the repository is behind remote/origin, the application will warn you
-by displaying a message in the system tray and by playing an alert sound.
-
-The application also display repository status (uncommitted changes,
-pushable commits,...) through the icons and their overlays.
+If the repository is behind its origin, the application will warn you by displaying a message in the system 
+tray and by playing an alert sound.
 
 
 Features
@@ -37,6 +35,7 @@ Features
 - detects uncommitted changes (just for information)
 - nice and explicit icon overlays for each state
 - you can choose between a dark and a white tray icon for a better integration with your desktop
+
 
 License
 =======
@@ -90,6 +89,7 @@ You will need to install from source (or from pypi).
 3) run the software from your application menu or from the command line::
 
     Time2Pull
+
 
 Known issues
 ============
