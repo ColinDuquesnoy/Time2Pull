@@ -1,5 +1,5 @@
-Time2Pull (Git repository monitor)
-==================================
+Time2Pull
+=========
 
 Time2Pull is small application that monitors your local git repositories and
 warns you when a remote got updated. It's time to pull!
