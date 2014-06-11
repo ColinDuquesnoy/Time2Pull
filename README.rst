@@ -77,7 +77,7 @@ Known issues
 
 1) Tray icon does not show on gnome shell:
 
-  Yes, this is a PyQt5 bug. You will need the top icons shell extension to view the tray icon.
+ Yes, this is a PyQt5 bug. You will need the top icons shell extension to view the tray icon.
 
 
 
