@@ -43,12 +43,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # run status refresh
         self.on_refresh_requested()
 
-    def setup_tray_icon(self):
+    def setup_tray_icon_mnu(self):
         self.tray_icon_menu = QtWidgets.QMenu(self)
         self.tray_icon_menu.addAction(self.actionRestore)
         self.tray_icon_menu.addSeparator()
         self.actionIconGroup = QtWidgets.QActionGroup(self)
-        self.actionIconGroup.triggered.connect(self.on_tray_icon_style_triggered)
+        self.actionIconGroup.triggered.connect(
+            self.on_tray_icon_style_triggered)
         for title in ['Light icon', 'Dark icon']:
             action = QtWidgets.QAction(title, self)
             action.setCheckable(True)
@@ -76,6 +77,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tray_icon_menu.addAction(self.actionQuit)
         if sys.platform != 'darwin':
             self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
+
+    def setup_tray_icon(self):
+        self.setup_tray_icon_mnu()
         self.tray_icon = QtWidgets.QSystemTrayIcon(self)
         self.tray_icon.setIcon(get_tray_icon(False))
         self.tray_icon.setContextMenu(self.tray_icon_menu)
@@ -136,6 +140,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             event.ignore()
 
     def _get_repositories_to_refresh(self):
+        # maybe only the selected if there is a selection ? not sure it would
+        # be useful.
         return Settings().repositories
 
     @QtCore.pyqtSlot()
