@@ -14,6 +14,8 @@ repositories you've added::
   $ git remote update
   $ git status -uno
   
+If one of the repository is behind remote/origin, the application will warn you by displaying a message in the system tray
+and by playing an alert sound.
 
 License
 =======
