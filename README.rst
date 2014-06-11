@@ -64,7 +64,7 @@ There is no binary packages for linux yet, and I won't make them myself but I am
 
 You will need to install from source (or from pypi).
 
-*Note: the directives are given for a debian based distribution, adapts the commands to suit your distribution.*
+*Note: the directives are given for a debian based distribution, you should adapt the commands to suit your distribution.*
 
 1) install dependencies using your distribution's pacakge manager::
 
