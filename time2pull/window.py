@@ -83,6 +83,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tray_icon.activated.connect(self.on_icon_activated)
         self.tray_icon.show()
         self.actionQuit.triggered.connect(self.quit)
+        self.addActions(self.tray_icon_menu.actions())
 
     def setup_icons(self):
         icon = QtGui.QIcon.fromTheme('add', QtGui.QIcon(':/time2pull/icons/add.png'))
