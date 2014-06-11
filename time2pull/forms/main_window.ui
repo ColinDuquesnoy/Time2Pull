@@ -99,9 +99,8 @@
   </widget>
   <action name="actionQuit">
    <property name="icon">
-    <iconset theme="exit">
-     <normaloff/>
-    </iconset>
+    <iconset theme="exit" resource="resources.qrc">
+     <normaloff>:/time2pull/icons/exit.png</normaloff>:/time2pull/icons/exit.png</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -109,9 +108,8 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="info">
-     <normaloff/>
-    </iconset>
+    <iconset theme="info" resource="resources.qrc">
+     <normaloff>:/time2pull/icons/info.png</normaloff>:/time2pull/icons/info.png</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -129,6 +127,10 @@
    </property>
   </action>
   <action name="actionHelp">
+   <property name="icon">
+    <iconset theme="help" resource="resources.qrc">
+     <normaloff>:/time2pull/icons/help.png</normaloff>:/time2pull/icons/help.png</iconset>
+   </property>
    <property name="text">
     <string>Help</string>
    </property>
@@ -137,6 +139,39 @@
    </property>
    <property name="shortcut">
     <string>F1</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset theme="refresh" resource="resources.qrc">
+     <normaloff>:/time2pull/icons/view-refresh.png</normaloff>:/time2pull/icons/view-refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionAdd">
+   <property name="icon">
+    <iconset theme="add" resource="resources.qrc">
+     <normaloff>:/time2pull/icons/add.png</normaloff>:/time2pull/icons/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a new repository to monitor</string>
+   </property>
+  </action>
+  <action name="actionRemove">
+   <property name="icon">
+    <iconset theme="remove" resource="resources.qrc">
+     <normaloff>:/time2pull/icons/remove.png</normaloff>:/time2pull/icons/remove.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove the selected repository from the monitoring list</string>
    </property>
   </action>
  </widget>

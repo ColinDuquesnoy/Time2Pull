@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="time2pull">
+    <file>icons/add.png</file>
+    <file>icons/exit.png</file>
+    <file>icons/help.png</file>
+    <file>icons/info.png</file>
+    <file>icons/remove.png</file>
+    <file>icons/view-refresh.png</file>
     <file>icons/loader.gif</file>
     <file>sounds/sonar.wav</file>
     <file>icons/Database.png</file>

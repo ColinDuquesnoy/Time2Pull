@@ -42,16 +42,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # run status refresh
         self.on_refresh_requested()
 
-    def setupUi(self, MainWindow):
-        super().setupUi(MainWindow)
-        # window properties
-        icon = QtGui.QIcon(':/time2pull/icons/git-light.png')
-        self.setWindowIcon(icon)
-        self.setWindowTitle("Time2Pull")
-        # refresh label movie
-        self.movie = QtGui.QMovie(':/time2pull/icons/loader.gif')
-        self.labelRefresh.setMovie(self.movie)
-        # Tray icon
+    def setup_tray_icon(self):
         self.tray_icon_menu = QtWidgets.QMenu(self)
         self.tray_icon_menu.addAction(self.actionRestore)
         self.tray_icon_menu.addSeparator()
@@ -84,6 +75,37 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tray_icon.show()
         self.actionQuit.triggered.connect(
             QtWidgets.QApplication.instance().quit)
+
+    def setup_icons(self):
+        icon = QtGui.QIcon.fromTheme('add', QtGui.QIcon(':/time2pull/icons/add.png'))
+        self.pushButtonAdd.setIcon(icon)
+        self.actionAdd.setIcon(icon)
+        icon = QtGui.QIcon.fromTheme('remove', QtGui.QIcon(':/time2pull/icons/remove.png'))
+        self.pushButtonRemove.setIcon(icon)
+        self.actionRemove.setIcon(icon)
+        icon = QtGui.QIcon.fromTheme('view-refresh', QtGui.QIcon(':/time2pull/icons/view-refresh.png'))
+        self.pushButtonRefresh.setIcon(icon)
+        self.actionRefresh.setIcon(icon)
+        icon = QtGui.QIcon.fromTheme('help', QtGui.QIcon(':/time2pull/icons/help.png'))
+        self.actionHelp.setIcon(icon)
+        icon = QtGui.QIcon.fromTheme('info', QtGui.QIcon(':/time2pull/icons/info.png'))
+        self.actionAbout.setIcon(icon)
+        icon = QtGui.QIcon.fromTheme('exit', QtGui.QIcon(':/time2pull/icons/exit.png'))
+        self.actionQuit.setIcon(icon)
+
+    def setupUi(self, MainWindow):
+        super().setupUi(MainWindow)
+        # setup icons, try to use theme if possible
+        self.setup_icons()
+        # window properties
+        icon = QtGui.QIcon(':/time2pull/icons/git-light.png')
+        self.setWindowIcon(icon)
+        self.setWindowTitle("Time2Pull")
+        # refresh label movie
+        self.movie = QtGui.QMovie(':/time2pull/icons/loader.gif')
+        self.labelRefresh.setMovie(self.movie)
+        # Tray icon
+        self.setup_tray_icon()
         # connect slots to signals
         self.timer.timeout.connect(self.on_refresh_requested)
         self.pushButtonRefresh.clicked.connect(self.on_refresh_requested)

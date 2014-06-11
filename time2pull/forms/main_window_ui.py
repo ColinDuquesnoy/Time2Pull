@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Wed Jun 11 21:23:52 2014
+# Created: Wed Jun 11 22:41:04 2014
 #      by: PyQt5 UI code generator 5.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,7 +61,21 @@ class Ui_MainWindow(object):
         self.actionRestore = QtWidgets.QAction(MainWindow)
         self.actionRestore.setObjectName("actionRestore")
         self.actionHelp = QtWidgets.QAction(MainWindow)
+        icon = QtGui.QIcon.fromTheme("help")
+        self.actionHelp.setIcon(icon)
         self.actionHelp.setObjectName("actionHelp")
+        self.actionRefresh = QtWidgets.QAction(MainWindow)
+        icon = QtGui.QIcon.fromTheme("refresh")
+        self.actionRefresh.setIcon(icon)
+        self.actionRefresh.setObjectName("actionRefresh")
+        self.actionAdd = QtWidgets.QAction(MainWindow)
+        icon = QtGui.QIcon.fromTheme("add")
+        self.actionAdd.setIcon(icon)
+        self.actionAdd.setObjectName("actionAdd")
+        self.actionRemove = QtWidgets.QAction(MainWindow)
+        icon = QtGui.QIcon.fromTheme("remove")
+        self.actionRemove.setIcon(icon)
+        self.actionRemove.setObjectName("actionRemove")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -80,5 +94,10 @@ class Ui_MainWindow(object):
         self.actionHelp.setText(_translate("MainWindow", "Help"))
         self.actionHelp.setToolTip(_translate("MainWindow", "View user manual"))
         self.actionHelp.setShortcut(_translate("MainWindow", "F1"))
+        self.actionRefresh.setText(_translate("MainWindow", "Refresh"))
+        self.actionAdd.setText(_translate("MainWindow", "Add"))
+        self.actionAdd.setToolTip(_translate("MainWindow", "Add a new repository to monitor"))
+        self.actionRemove.setText(_translate("MainWindow", "Remove"))
+        self.actionRemove.setToolTip(_translate("MainWindow", "Remove the selected repository from the monitoring list"))
 
 from . import resources_rc
