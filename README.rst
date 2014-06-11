@@ -1,9 +1,12 @@
 Time2Pull (Git repository monitor)
 ==================================
 
-Time2Pull is small application that monitor your local git repositories and warn you when the remote changed (e.g. one of your colleague just pushed to the repository).
+Time2Pull is small application that monitors your local git repositories and
+warns you when a remote got updated. It's time to pull!
 
-This is particularly useful if you're working with a centralised workflow where all developpers pull and push from a central repository.
+This is particularly useful if you're working with a centralised workflow
+(where all developers pull and push from a central repository) and want to
+be quickly notified anytime the remote got updated.
 
 
 How does it work?
@@ -11,20 +14,17 @@ How does it work?
 
 First you add the paths to the local repositories you would like to monitor.
 
-Then, every minutes, the application will execute the two following git commands to detect remote status changes on every
-repositories you've added::
+Then, every minutes, the application will execute the two following git
+commands to detect remote status changes on every repositories you've added::
 
   $ git remote update
   $ git status -uno
   
-If one the repository is behind remote/origin, the application will warn you by displaying a message in the system tray
-and by playing an alert sound. 
+If one the repository is behind remote/origin, the application will warn you
+by displaying a message in the system tray and by playing an alert sound.
 
-The application also display the repository status (uncommitted changes, pushable commits,...) as an icon.
-
-See the screeshots:
-
-  
+The application also display repository status (uncommitted changes,
+pushable commits,...) through the icons and their overlays.
 
 License
 =======
@@ -43,7 +43,7 @@ Time2Pull uses the following softwares:
 
 
 Installation
-=============
+============
 
 Windows
 -------
@@ -66,31 +66,26 @@ You will need to install from source (or from pypi).
 
 *Note: the directives are given for a debian based distribution, you should adapt the commands to suit your distribution.*
 
-1) install dependencies using your distribution's pacakge manager::
+1) install dependencies using your distribution's package manager::
 
     sudo apt-get install python3-pyqt5 git
-  
-2) install the package from source or from pypi (a desktop entry will be created so that the app appears in your menu)::
+
+
+2) install the package, using pip for python3::
 
     sudo pip3 install Time2Pull
-    
-
-   or (from source)::
-   
-
-    sudo pip3 install .
   
   
 Known issues
--------------
+------------
 
-1) Tray icon does not show on gnome shell:
+- Tray icon does not show on Gnome 3:
 
- Yes, this is a PyQt5 bug. You will need the top icons shell extension to view the tray icon.
+  This seems to be a PyQt5 bug. You will need the top icons shell extension to
+  view the tray icon.
 
+- Alert sound not playing on some GNU/Linux distrubitons:
 
-
-
-
-
-
+  There seem to be a problem with QtMultimedia on GNU/Linux. There is no known
+  workaround. If you found a solution, please open a new issue or, better,
+  submit a pull request!
