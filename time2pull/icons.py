@@ -27,7 +27,7 @@ def get_status_icon(has_local_changes=False, status=RemoteStatus.up_to_date,
         return QtGui.QIcon(base)
 
 
-def get_app_icon(is_behind):
+def get_tray_icon(is_behind):
     icons = {
         TrayIconType.light: ':/time2pull/icons/git-light.png',
         TrayIconType.dark: ':/time2pull/icons/git-dark.png'
@@ -60,6 +60,6 @@ if __name__ == '__main__':
             item.setIcon(get_status_icon(dirty, status))
             item.setText('/home/usr/Repo')
             window.addItem(item)
-    window.setWindowIcon(get_app_icon(True))
+    window.setWindowIcon(get_tray_icon(True))
     window.show()
     app.exec_()

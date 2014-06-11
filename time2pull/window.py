@@ -5,7 +5,7 @@ import os
 from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimedia
 from time2pull import __version__
 from time2pull.constants import RemoteStatus
-from time2pull.icons import get_status_icon, get_app_icon
+from time2pull.icons import get_status_icon, get_tray_icon
 from time2pull.forms.main_window_ui import Ui_MainWindow
 from time2pull.settings import Settings
 from time2pull.worker import WorkerThread
@@ -55,7 +55,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionQuit)
         self.tray_icon = QtWidgets.QSystemTrayIcon(self)
-        self.tray_icon.setIcon(get_app_icon(False))
+        self.tray_icon.setIcon(get_tray_icon(False))
         self.tray_icon.setContextMenu(self.tray_icon_menu)
         self.tray_icon.messageClicked.connect(self.on_message_clicked)
         self.tray_icon.activated.connect(self.on_icon_activated)
@@ -97,6 +97,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.worker_thread.set_repositories_to_refresh(repos)
             self.worker_thread.wake_up()
 
+    def update_tray_icon(self):
+        is_behind = False
+        for i in range(self.listWidgetRepos.count()):
+            item = self.listWidgetRepos.item(i)
+            _, remote_status = item.data(QtCore.Qt.UserRole)
+            if remote_status == RemoteStatus.behind:
+                is_behind = True
+                break
+        self.tray_icon.setIcon(get_tray_icon(is_behind))
+
     @QtCore.pyqtSlot()
     def on_refresh_finished(self):
         self.timer.start()
@@ -107,13 +117,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listWidgetRepos.setEnabled(True)
         self.labelRefresh.setVisible(False)
         self.movie.stop()
-        for i in range(self.listWidgetRepos.count()):
-            item = self.listWidgetRepos.item(i)
-            _, remote_status = item.data(QtCore.Qt.UserRole)
-            if remote_status == RemoteStatus.behind:
-                self.tray_icon.setIcon(get_app_icon(True))
-                return
-        self.tray_icon.setIcon(get_app_icon(False))
+        self.update_tray_icon()
 
     @QtCore.pyqtSlot()
     def on_pushButtonAdd_clicked(self):
@@ -158,7 +162,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tray_icon.showMessage(
             repo_name,
             "Remote repository has been updated. It's time to pull!")
-        QtMultimedia.QSound.play(':/time2pull/sounds/sonar.ogg')
+        QtMultimedia.QSound.play(':/time2pull/sounds/sonar.wav')
 
     @QtCore.pyqtSlot(str, bool, object)
     def on_status_available(self, repo, dirty, remote_status):
@@ -172,6 +176,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 if(remote_status == RemoteStatus.behind and
                         old_remote_status != RemoteStatus.behind):
                     self.alert(repo)
+        self.update_tray_icon()
 
     @QtCore.pyqtSlot(object)
     def on_icon_activated(self, reason):

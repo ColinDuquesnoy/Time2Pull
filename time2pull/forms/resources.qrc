@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="time2pull">
-    <file>sounds/sonar.ogg</file>
     <file>icons/loader.gif</file>
+    <file>sounds/sonar.wav</file>
     <file>icons/Database.png</file>
     <file>icons/DatabaseDirty.png</file>
     <file>icons/Download.png</file>
