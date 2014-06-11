@@ -10,10 +10,12 @@ a context menu that let you add new repositories and show the main window.
 import sys
 from PyQt5 import QtWidgets
 from time2pull.window import MainWindow
+from time2pull.settings import Settings
 
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     win = MainWindow()
-    win.show()
+    if not Settings().hide_on_startup:
+        win.show()
     app.exec_()

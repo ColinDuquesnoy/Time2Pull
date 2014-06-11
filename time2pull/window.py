@@ -61,6 +61,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         mnu.setTitle('Tray icon')
         mnu.addActions(self.actionIconGroup.actions())
         self.tray_icon_menu.addMenu(mnu)
+        self.tray_icon_menu.addAction(self.actionHide_on_startup)
+        self.actionHide_on_startup.setChecked(Settings().hide_on_startup)
+        self.tray_icon_menu.addSeparator()
+        self.tray_icon_menu.addAction(self.actionAdd)
+        self.actionAdd.triggered.connect(self.on_pushButtonAdd_clicked)
+        self.tray_icon_menu.addAction(self.actionRefresh)
+        self.actionRefresh.triggered.connect(self.on_refresh_requested)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionHelp)
         self.tray_icon_menu.addAction(self.actionAbout)
@@ -270,3 +277,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def quit(self):
         self._quitting = True
         QtWidgets.QApplication.instance().quit()
+
+    @QtCore.pyqtSlot(bool)
+    def on_actionHide_on_startup_toggled(self, checked):
+        Settings().hide_on_startup = checked

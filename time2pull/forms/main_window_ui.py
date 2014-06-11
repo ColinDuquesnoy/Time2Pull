@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Wed Jun 11 22:41:04 2014
+# Created: Wed Jun 11 22:59:40 2014
 #      by: PyQt5 UI code generator 5.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -76,6 +76,9 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon.fromTheme("remove")
         self.actionRemove.setIcon(icon)
         self.actionRemove.setObjectName("actionRemove")
+        self.actionHide_on_startup = QtWidgets.QAction(MainWindow)
+        self.actionHide_on_startup.setCheckable(True)
+        self.actionHide_on_startup.setObjectName("actionHide_on_startup")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -99,5 +102,7 @@ class Ui_MainWindow(object):
         self.actionAdd.setToolTip(_translate("MainWindow", "Add a new repository to monitor"))
         self.actionRemove.setText(_translate("MainWindow", "Remove"))
         self.actionRemove.setToolTip(_translate("MainWindow", "Remove the selected repository from the monitoring list"))
+        self.actionHide_on_startup.setText(_translate("MainWindow", "Hide on startup"))
+        self.actionHide_on_startup.setToolTip(_translate("MainWindow", "Hide the main window when the application starts."))
 
 from . import resources_rc

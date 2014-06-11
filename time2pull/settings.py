@@ -31,3 +31,11 @@ class Settings:
     @tray_icon_type.setter
     def tray_icon_type(self, value):
         self._settings.setValue('tray_icon_type', int(value))
+
+    @property
+    def hide_on_startup(self):
+        return bool(int(self._settings.value('hide_on_startup', 0)))
+
+    @hide_on_startup.setter
+    def hide_on_startup(self, value):
+        self._settings.setValue('hide_on_startup', int(value))
