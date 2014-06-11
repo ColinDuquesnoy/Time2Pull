@@ -71,7 +71,7 @@ Use the dmg installer available in the release section
 GNU/Linux
 ---------
 
-There is no binary packages for linux yet, and I won't make them myself but I am open to help packagers who would like to package the application.
+There is no binary packages for linux yet. *I won't make them myself but I am ready to help packagers who would like to volunteer, if any.*
 
 You will need to install from source (or from pypi).
 
@@ -85,7 +85,8 @@ You will need to install from source (or from pypi).
 2) install the package, using pip for python3::
 
     sudo pip3 install Time2Pull
-  
+
+
 3) run the software from your application menu or from the command line::
 
     Time2Pull
