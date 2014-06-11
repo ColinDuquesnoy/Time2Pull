@@ -106,11 +106,11 @@ Screenshots
 
 Main Window:
 
-.. image:: https://github.com/ColinDuquesnoy/Time2Pull/blob/develop/doc/_static/Time2Pull.png
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
     :align: center
 
 Overlays and their meanings:
 
 
-.. image:: https://github.com/ColinDuquesnoy/Time2Pull/blob/develop/doc/_static/Time2PullOverlays.png
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
     :align: center
