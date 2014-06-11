@@ -15,6 +15,7 @@ from time2pull.worker import WorkerThread
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self._quitting = False
         self._user_warned_about_tray = False
         # configure refresh timer
         self.timer = QtCore.QTimer()
@@ -66,15 +67,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionQuit)
-        self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
+        if sys.platform != 'darwin':
+            self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
         self.tray_icon = QtWidgets.QSystemTrayIcon(self)
         self.tray_icon.setIcon(get_tray_icon(False))
         self.tray_icon.setContextMenu(self.tray_icon_menu)
         self.tray_icon.messageClicked.connect(self.on_message_clicked)
         self.tray_icon.activated.connect(self.on_icon_activated)
         self.tray_icon.show()
-        self.actionQuit.triggered.connect(
-            QtWidgets.QApplication.instance().quit)
+        self.actionQuit.triggered.connect(self.quit)
 
     def setup_icons(self):
         icon = QtGui.QIcon.fromTheme('add', QtGui.QIcon(':/time2pull/icons/add.png'))
@@ -114,7 +115,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.actionRestore.triggered.connect(self.restore)
 
     def closeEvent(self, event):
-        if self.tray_icon.isVisible():
+        if not self._quitting:
             if not self._user_warned_about_tray:
                 QtWidgets.QMessageBox.information(
                     self, "Time2Pull",
@@ -265,3 +266,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         settings.tray_icon_type = (
             TrayIconType.dark if 'dark' in ltext else TrayIconType.light)
         self.update_tray_icon()
+
+    def quit(self):
+        self._quitting = True
+        QtWidgets.QApplication.instance().quit()
