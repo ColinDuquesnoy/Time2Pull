@@ -27,6 +27,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.worker_thread.status_available.connect(self.on_status_available)
         # load repositories
         self.listWidgetRepos.clear()
+        self.listWidgetRepos.setIconSize(QtCore.QSize(64, 64))
         settings = Settings()
         for file in settings.repositories:
             item = QtWidgets.QListWidgetItem()

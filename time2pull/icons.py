@@ -7,7 +7,7 @@ from time2pull.settings import Settings
 
 
 def get_status_icon(has_local_changes=False, status=RemoteStatus.up_to_date,
-             size=QtCore.QSize(64, 64), offset=(16, 16)):
+             size=QtCore.QSize(64, 64), offset=(0, 0)):
     base = ':/time2pull/icons/Database.png' if not has_local_changes else \
         ':/time2pull/icons/DatabaseDirty.png'
     icons = {
@@ -20,7 +20,7 @@ def get_status_icon(has_local_changes=False, status=RemoteStatus.up_to_date,
     if overlay_icon:
         icon_pixmap = QtGui.QIcon(base).pixmap(size)
         painter = QtGui.QPainter(icon_pixmap)
-        painter.drawPixmap(offset[0], offset[1], overlay_icon.pixmap(32, 32))
+        painter.drawPixmap(offset[0], offset[1], overlay_icon.pixmap(48, 48))
         painter.end()
         return QtGui.QIcon(icon_pixmap)
     else:
@@ -52,12 +52,13 @@ if __name__ == '__main__':
 
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QListWidget()
-    window.resize(340, 220)
-    for dirty in [False, True]:
+    window.setIconSize(QtCore.QSize(64, 64))
+    window.resize(640, 480)
+    for dirty, prefix in zip([False, True], ['No un-committed changes', 'Un-committed changes']):
         for status in RemoteStatus:
             item = QtWidgets.QListWidgetItem()
             item.setIcon(get_status_icon(dirty, status))
-            item.setText('/home/usr/Repo')
+            item.setText('%s - %s' % (prefix, str(status)))
             window.addItem(item)
     window.setWindowIcon(get_tray_icon(True))
     window.show()
