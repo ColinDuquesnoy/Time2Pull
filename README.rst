@@ -77,7 +77,7 @@ You will need to install from source (or from pypi).
   
   
 Known issues
-------------
+============
 
 - Tray icon does not show on Gnome 3:
 
