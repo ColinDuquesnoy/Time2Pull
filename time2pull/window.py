@@ -123,7 +123,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def closeEvent(self, event):
         if not self._quitting:
-            if not self._user_warned_about_tray:
+            if (not self._user_warned_about_tray and
+                    not Settings().hide_on_startup):
                 QtWidgets.QMessageBox.information(
                     self, "Time2Pull",
                     "The program will keep running in the system tray.\n"
