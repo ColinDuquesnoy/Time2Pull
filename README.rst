@@ -37,6 +37,19 @@ Features
 - nice and explicit icon overlays for each state
 - you can choose between a dark and a white tray icon for a better integration with your desktop
 
+Screenshots
+===========
+
+Main Window:
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
+    :align: center
+
+Overlays and their meanings:
+
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
+    :align: center
 
 License
 =======
@@ -100,18 +113,3 @@ Known issues
 
   This seems to be a PyQt5 bug. You will need the top icons shell extension to
   view the tray icon.
-
-
-Screenshots
-===========
-
-Main Window:
-
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
-    :align: center
-
-Overlays and their meanings:
-
-
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
-    :align: center
