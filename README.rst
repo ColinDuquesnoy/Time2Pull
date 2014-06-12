@@ -1,5 +1,4 @@
 .. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull.png
-
 Time2Pull
 =========
 
