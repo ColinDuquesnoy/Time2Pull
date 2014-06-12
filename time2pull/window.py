@@ -222,14 +222,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_pushButtonRemove_clicked(self):
         repo = self.listWidgetRepos.currentItem().text()
-        self.listWidgetRepos.takeItem(self.listWidgetRepos.currentRow())
-        settings = Settings()
-        repos = settings.repositories
-        try:
-            repos.remove(repo)
-        except ValueError:
-            pass
-        settings.repositories = repos
+        answer = QtWidgets.QMessageBox.question(
+            self, 'Remove repository',
+            'Are you sure you want to remove repository: %s?' % repo)
+        if answer == QtWidgets.QMessageBox.Yes:
+            self.listWidgetRepos.takeItem(self.listWidgetRepos.currentRow())
+            settings = Settings()
+            repos = settings.repositories
+            try:
+                repos.remove(repo)
+            except ValueError:
+                pass
+            settings.repositories = repos
 
     @QtCore.pyqtSlot()
     def on_selection_changed(self):
