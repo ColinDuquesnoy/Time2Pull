@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/time2pull/icons/git-light.png</normaloff>:/time2pull/icons/git-light.png</iconset>
+    <normaloff>:/time2pull/icons/Time2Pull.png</normaloff>:/time2pull/icons/Time2Pull.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">

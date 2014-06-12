@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="time2pull">
+    <file>icons/Time2Pull.png</file>
     <file>icons/Download-dark.png</file>
     <file>icons/Download-light.png</file>
     <file>icons/add.png</file>
@@ -15,7 +16,5 @@
     <file>icons/Download.png</file>
     <file>icons/DownloadUpload.png</file>
     <file>icons/Upload.png</file>
-    <file>icons/git-dark.png</file>
-    <file>icons/git-light.png</file>
   </qresource>
 </RCC>

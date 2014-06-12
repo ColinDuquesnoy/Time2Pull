@@ -127,7 +127,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # setup icons, try to use theme if possible
         self.setup_icons()
         # window properties
-        icon = QtGui.QIcon(':/time2pull/icons/git-light.png')
+        icon = QtGui.QIcon(':/time2pull/icons/Time2Pull.png')
         self.setWindowIcon(icon)
         self.setWindowTitle("Time2Pull")
         # refresh label movie

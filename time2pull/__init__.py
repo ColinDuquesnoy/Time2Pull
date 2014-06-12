@@ -10,6 +10,7 @@ repository and parse their output to detect the remote status::
     git status -uno
 
 Icons source:
+    - app icon : https://www.iconfinder.com/icons/126865/clock_loading_refresh_reload_slow_throbber_time_update_wait_waiting_icon#size=96
     - arrows: http://kyo-tux.deviantart.com/
     - database: http://www.icojoy.com
     - git: https://www.iconfinder.com/icons/83306/git_icon#size=32
