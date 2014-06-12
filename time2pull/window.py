@@ -278,10 +278,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.restore()
 
     @QtCore.pyqtSlot()
+    @ensure_visible
     def on_actionAbout_triggered(self):
         QtWidgets.QMessageBox.about(
             self, 'About Time2Pull',
-            'Time2Pull is small application that monitors your local git '
+            'Time2Pull is a small application that monitors your local git '
             'repositories and warns you when a remote got updated.'
             '\n'
             '\n'
