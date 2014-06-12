@@ -17,7 +17,7 @@ class Settings:
             ret_val = []
         elif isinstance(ret_val, str):
             ret_val = [ret_val]
-        return ret_val
+        return sorted(ret_val)
 
     @repositories.setter
     def repositories(self, value):
