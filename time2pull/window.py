@@ -162,6 +162,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def on_refresh_requested(self):
+        self.tray_icon.setVisible(True)
         repos = self._get_repositories_to_refresh()
         if repos:
             self.timer.stop()
