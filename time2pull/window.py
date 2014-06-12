@@ -300,6 +300,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.update_tray_icon()
 
     def quit(self):
+        self.tray_icon.setVisible(False)
         self._quitting = True
         QtWidgets.QApplication.instance().quit()
 
