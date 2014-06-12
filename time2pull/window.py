@@ -129,7 +129,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # window properties
         icon = QtGui.QIcon(':/time2pull/icons/Time2Pull.png')
         self.setWindowIcon(icon)
-        self.setWindowTitle("Time2Pull")
+        self.setWindowTitle("Time2Pull %s" % __version__)
         # refresh label movie
         self.movie = QtGui.QMovie(':/time2pull/icons/loader.gif')
         self.labelRefresh.setMovie(self.movie)
