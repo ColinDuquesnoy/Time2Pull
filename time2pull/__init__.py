@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Time2Pull is a small application that monitor git repositories and notify you
 when the remote has changed and its time to pull.

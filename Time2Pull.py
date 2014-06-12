@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 This application monitor git repository and warn you when changes have been
 made upstream. Basically, it lets you know when one of you colleagure pushed
