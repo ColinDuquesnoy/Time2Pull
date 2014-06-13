@@ -2,6 +2,7 @@
 """
 This module contains the worker thread implementation.
 """
+import locale
 from PyQt5 import QtCore
 from time2pull.constants import RemoteStatus
 
@@ -74,7 +75,8 @@ class WorkerThread(QtCore.QThread):
         process.setWorkingDirectory(repo)
         process.start('git', ['status', '-uno'])
         process.waitForFinished()
-        output = process.readAllStandardOutput().data().decode('utf-8')
+        output = process.readAllStandardOutput().data().decode(
+            locale.getpreferredencoding())
         # print(output)
         if 'behind' in output:
             status = RemoteStatus.behind
