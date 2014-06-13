@@ -58,3 +58,25 @@ class Settings:
     @play_sound.setter
     def play_sound(self, value):
         self._settings.setValue('play_sound', int(value))
+
+    @property
+    def geometry(self):
+        v = self._settings.value("geometry")
+        if v:
+            return bytes(v)
+        return None
+
+    @geometry.setter
+    def geometry(self, geometry):
+        self._settings.setValue("geometry", geometry)
+
+    @property
+    def state(self):
+        v = self._settings.value("state")
+        if v:
+            return bytes(v)
+        return None
+
+    @state.setter
+    def state(self, state):
+        self._settings.setValue("state", state)

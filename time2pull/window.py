@@ -37,6 +37,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.worker_thread.finished.connect(self.on_refresh_finished)
         self.worker_thread.status_available.connect(self.on_status_available)
         # load repositories
+        self.load_repo_from_settings()# refresh ui
+        self.pushButtonRemove.setEnabled(
+            bool(len(self.listWidgetRepos.selectedItems())))
+        self.pushButtonRefresh.setEnabled(bool(self.listWidgetRepos.count()))
+        self.check_git()
+        # run status refresh
+        self.on_refresh_requested()
+
+    def check_git(self):
+        # check for git
+        if os.system('git --version') != 0:
+            self.show()
+            QtWidgets.QMessageBox.warning(
+                self, 'Git not found',
+                'Cannot find git, please add it to your PATH')
+            sys.exit(1)
+
+    def load_repo_from_settings(self):
         self.listWidgetRepos.clear()
         self.listWidgetRepos.setIconSize(QtCore.QSize(64, 64))
         settings = Settings()
@@ -46,19 +64,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             item.setIcon(get_status_icon())
             item.setData(QtCore.Qt.UserRole, (False, RemoteStatus.up_to_date))
             self.listWidgetRepos.addItem(item)
-        # refresh ui
-        self.pushButtonRemove.setEnabled(
-            bool(len(self.listWidgetRepos.selectedItems())))
-        self.pushButtonRefresh.setEnabled(bool(self.listWidgetRepos.count()))
-        # run status refresh
-        self.on_refresh_requested()
 
-        # check for git
-        if os.system('git --version') != 0:
-            self.show()
-            QtWidgets.QMessageBox.warning(
-                self, 'Git not found',
-                'Cannot find git, please add it to your PATH')
+    def restore_geometry_and_state(self):
+        s = Settings()
+        if s.geometry:
+            self.restoreGeometry(s.geometry)
+        if s.state:
+            self.restoreState(s.state)
 
     def setup_tray_icon_mnu(self):
         self.tray_icon_menu = QtWidgets.QMenu(self)
@@ -100,8 +112,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionQuit)
-        if sys.platform != 'darwin':
-            self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
+        self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
 
     def setup_tray_icon(self):
         self.setup_tray_icon_mnu()
@@ -150,6 +161,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listWidgetRepos.itemSelectionChanged.connect(
             self.on_selection_changed)
         self.actionRestore.triggered.connect(self.restore)
+        self.restore_geometry_and_state()
 
     def closeEvent(self, event):
         if not self._quitting:
@@ -163,6 +175,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self._user_warned_about_tray = True
             self.hide()
             event.ignore()
+        # save geometry and state
+        s = Settings()
+        s.geometry = self.saveGeometry()
+        s.state = self.saveState()
 
     def _get_repositories_to_refresh(self):
         # maybe only the selected if there is a selection ? not sure it would
@@ -178,7 +194,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.pushButtonRefresh.setEnabled(False)
             self.pushButtonAdd.setEnabled(False)
             self.pushButtonRemove.setEnabled(False)
-            self.listWidgetRepos.setEnabled(False)
+            # self.listWidgetRepos.setEnabled(False)
             self.labelRefresh.setVisible(True)
             self.movie.start()
             self.worker_thread.set_repositories_to_refresh(repos)
@@ -247,7 +263,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_selection_changed(self):
         self.pushButtonRemove.setEnabled(
-            bool(len(self.listWidgetRepos.selectedItems())))
+            len(self.listWidgetRepos.selectedItems()) and
+            self.worker_thread.is_sleeping())
 
     def alert(self, repo):
         if Settings().show_msg:
@@ -334,5 +351,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def on_actionPlay_alert_sound_triggered(self):
         Settings().play_sound = self.actionPlay_alert_sound.isChecked()
 
+    @QtCore.pyqtSlot()
     def on_actionShow_message_triggered(self):
         Settings().show_msg = self.actionShow_message.isChecked()
