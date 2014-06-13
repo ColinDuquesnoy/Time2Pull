@@ -304,6 +304,31 @@
     <string>Ctrl+H</string>
    </property>
   </action>
+  <action name="actionShow_message">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show message</string>
+   </property>
+   <property name="toolTip">
+    <string>Show/hide system tray messages</string>
+   </property>
+  </action>
+  <action name="actionPlay_alert_sound">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Play alert sound</string>
+   </property>
+   <property name="toolTip">
+    <string>Enable/Disable alert sound</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="resources.qrc"/>

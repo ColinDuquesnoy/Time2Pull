@@ -42,3 +42,19 @@ class Settings:
     @hide_on_startup.setter
     def hide_on_startup(self, value):
         self._settings.setValue('hide_on_startup', int(value))
+
+    @property
+    def show_msg(self):
+        return bool(int(self._settings.value('show_msg', '1')))
+
+    @show_msg.setter
+    def show_msg(self, value):
+        self._settings.setValue('show_msg', int(value))
+
+    @property
+    def play_sound(self):
+        return bool(int(self._settings.value('play_sound', "1")))
+
+    @play_sound.setter
+    def play_sound(self, value):
+        self._settings.setValue('play_sound', int(value))

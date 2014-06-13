@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Thu Jun 12 22:25:03 2014
-#      by: PyQt5 UI code generator 5.2.1
+# Created: Fri Jun 13 18:29:09 2014
+#      by: PyQt5 UI code generator 5.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -116,6 +116,13 @@ class Ui_MainWindow(object):
         self.actionHide_on_startup = QtWidgets.QAction(MainWindow)
         self.actionHide_on_startup.setCheckable(True)
         self.actionHide_on_startup.setObjectName("actionHide_on_startup")
+        self.actionShow_message = QtWidgets.QAction(MainWindow)
+        self.actionShow_message.setCheckable(True)
+        self.actionShow_message.setChecked(False)
+        self.actionShow_message.setObjectName("actionShow_message")
+        self.actionPlay_alert_sound = QtWidgets.QAction(MainWindow)
+        self.actionPlay_alert_sound.setCheckable(True)
+        self.actionPlay_alert_sound.setObjectName("actionPlay_alert_sound")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -146,5 +153,9 @@ class Ui_MainWindow(object):
         self.actionHide_on_startup.setText(_translate("MainWindow", "Hide on startup"))
         self.actionHide_on_startup.setToolTip(_translate("MainWindow", "Hide the main window when the application starts."))
         self.actionHide_on_startup.setShortcut(_translate("MainWindow", "Ctrl+H"))
+        self.actionShow_message.setText(_translate("MainWindow", "Show message"))
+        self.actionShow_message.setToolTip(_translate("MainWindow", "Show/hide system tray messages"))
+        self.actionPlay_alert_sound.setText(_translate("MainWindow", "Play alert sound"))
+        self.actionPlay_alert_sound.setToolTip(_translate("MainWindow", "Enable/Disable alert sound"))
 
 from . import resources_rc

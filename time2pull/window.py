@@ -64,6 +64,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tray_icon_menu = QtWidgets.QMenu(self)
         self.tray_icon_menu.addAction(self.actionRestore)
         self.tray_icon_menu.addSeparator()
+        self.tray_icon_menu.addAction(self.actionAdd)
+        self.actionAdd.triggered.connect(self.on_pushButtonAdd_clicked)
+        self.tray_icon_menu.addAction(self.actionRefresh)
+        self.actionRefresh.triggered.connect(self.on_refresh_requested)
+        self.tray_icon_menu.addSeparator()
+        # Preferences
+        preferences = QtWidgets.QMenu('Preferences', self)
         self.actionIconGroup = QtWidgets.QActionGroup(self)
         self.actionIconGroup.triggered.connect(
             self.on_tray_icon_style_triggered)
@@ -78,15 +85,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         mnu = QtWidgets.QMenu(self)
         mnu.setTitle('Tray icon')
         mnu.addActions(self.actionIconGroup.actions())
-        self.tray_icon_menu.addMenu(mnu)
-        self.tray_icon_menu.addAction(self.actionHide_on_startup)
+        preferences.addMenu(mnu)
+        preferences.addAction(self.actionHide_on_startup)
         self.actionHide_on_startup.setChecked(Settings().hide_on_startup)
+        self.tray_icon_menu.addMenu(preferences)
+        preferences.addAction(self.actionPlay_alert_sound)
+        preferences.addAction(self.actionShow_message)
+        self.actionShow_message.setChecked(Settings().show_msg)
+        self.actionPlay_alert_sound.setChecked(Settings().play_sound)
         self.tray_icon_menu.addSeparator()
-        self.tray_icon_menu.addAction(self.actionAdd)
-        self.actionAdd.triggered.connect(self.on_pushButtonAdd_clicked)
-        self.tray_icon_menu.addAction(self.actionRefresh)
-        self.actionRefresh.triggered.connect(self.on_refresh_requested)
-        self.tray_icon_menu.addSeparator()
+
         self.tray_icon_menu.addAction(self.actionHelp)
         self.tray_icon_menu.addAction(self.actionAbout)
         self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
@@ -242,11 +250,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             bool(len(self.listWidgetRepos.selectedItems())))
 
     def alert(self, repo):
-        repo_name = QtCore.QFileInfo(repo).fileName()
-        self.tray_icon.showMessage(
-            repo_name,
-            "Remote repository has been updated. It's time to pull!")
-        QtMultimedia.QSound.play(':/time2pull/sounds/sonar.wav')
+        if Settings().show_msg:
+            repo_name = QtCore.QFileInfo(repo).fileName()
+            self.tray_icon.showMessage(
+                repo_name,
+                "Remote repository has been updated. It's time to pull!")
+        if Settings().play_sound:
+            QtMultimedia.QSound.play(':/time2pull/sounds/sonar.wav')
 
     @QtCore.pyqtSlot(str, bool, object)
     def on_status_available(self, repo, dirty, remote_status):
@@ -319,3 +329,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @ensure_visible
     def on_actionRefresh_triggered(self):
         self.on_refresh_requested()
+
+    @QtCore.pyqtSlot()
+    def on_actionPlay_alert_sound_triggered(self):
+        Settings().play_sound = self.actionPlay_alert_sound.isChecked()
+
+    def on_actionShow_message_triggered(self):
+        Settings().show_msg = self.actionShow_message.isChecked()
