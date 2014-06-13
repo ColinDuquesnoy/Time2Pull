@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Thu Jun 12 12:22:02 2014
+# Created: Thu Jun 12 22:25:03 2014
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -53,11 +53,21 @@ class Ui_MainWindow(object):
         self.listWidgetRepos = QtWidgets.QListWidget(self.centralwidget)
         self.listWidgetRepos.setObjectName("listWidgetRepos")
         self.horizontalLayout_3.addWidget(self.listWidgetRepos)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setContentsMargins(0, -1, -1, -1)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem3)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_2.addWidget(self.label_2)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_2)
         self.gridLayout.addLayout(self.horizontalLayout_3, 3, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem3)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem4)
         self.pushButtonAdd = QtWidgets.QPushButton(self.centralwidget)
         icon = QtGui.QIcon.fromTheme("add")
         self.pushButtonAdd.setIcon(icon)
@@ -73,9 +83,9 @@ class Ui_MainWindow(object):
         self.pushButtonRefresh.setIcon(icon)
         self.pushButtonRefresh.setObjectName("pushButtonRefresh")
         self.horizontalLayout.addWidget(self.pushButtonRefresh)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem4)
-        self.gridLayout.addLayout(self.horizontalLayout, 2, 0, 1, 1)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem5)
+        self.gridLayout.addLayout(self.horizontalLayout, 4, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionQuit = QtWidgets.QAction(MainWindow)
         icon = QtGui.QIcon.fromTheme("exit")
@@ -113,7 +123,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Time2Pull"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/time2pull/icons/Time2Pull.png\"/></p><p align=\"center\"><span style=\" font-size:16pt;\">Time2Pull</span></p><p align=\"center\"><span style=\" font-size:10pt; font-style:italic;\">Get notified when your remote git repository got updated!</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/time2pull/icons/Time2Pull-small.png\"/></p><p align=\"center\"><span style=\" font-size:16pt;\">Time2Pull</span></p><p align=\"center\"><span style=\" font-size:10pt; font-style:italic;\">Get notified when your remote git repository got updated!</span></p></body></html>"))
         self.pushButtonAdd.setText(_translate("MainWindow", "Add "))
         self.pushButtonRemove.setText(_translate("MainWindow", "Remove"))
         self.pushButtonRefresh.setText(_translate("MainWindow", "Refresh"))
