@@ -1,6 +1,5 @@
 
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull.png
-
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull_banner.png
 
 Time2Pull is small application that monitors your local git repositories and
 warns you when a remote got updated, i.e. *it's time to pull!*
@@ -37,19 +36,6 @@ Features
 - nice and explicit icon overlays for each state
 - you can choose between a dark and a white tray icon for a better integration with your desktop
 
-Screenshots
-===========
-
-Main Window:
-
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
-    :align: center
-
-Overlays and their meanings:
-
-
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
-    :align: center
 
 License
 =======
@@ -104,6 +90,17 @@ You will need to install from source (or from pypi).
 3) run the software from your application menu or from the command line::
 
     Time2Pull
+
+
+Overlays
+========
+
+Overlays and their meanings:
+
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
+    :align: center
+
 
 
 Known issues
