@@ -102,6 +102,14 @@ Overlays and their meanings:
     :align: center
 
 
+Credits
+=======
+
+- application icon: Céline Thiry <thiry.celi@gmail.com>
+- arrow down & up icons: http://kyo-tux.deviantart.com/
+- disk icon: http://www.icojoy.com
+- tango icon theme: http://tango.freedesktop.org/
+
 
 Known issues
 ============
@@ -110,8 +118,6 @@ Known issues
 
   This seems to be a PyQt5 bug. You will need the top icons shell extension to
   view the tray icon.
-
-
 
 
 Indices and tables

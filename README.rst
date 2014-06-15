@@ -1,7 +1,5 @@
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull_banner.png
 
-Time2Pull
-=========
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull_banner.png
 
 Time2Pull is small application that monitors your local git repositories and
 warns you when a remote got updated, i.e. *it's time to pull!*
@@ -114,3 +112,12 @@ Known issues
 
   This seems to be a PyQt5 bug. You will need the top icons shell extension to
   view the tray icon.
+
+
+Credits
+=======
+
+- application icon: Céline Thiry <thiry.celi@gmail.com>
+- arrow down & up icons: http://kyo-tux.deviantart.com/
+- disk icon: http://www.icojoy.com
+- tango icon theme: http://tango.freedesktop.org/
