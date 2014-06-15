@@ -18,7 +18,7 @@ Icons source:
 
 """
 
-__version__ = '1.0.0-beta2'
+__version__ = '1.0'
 
 
 import sys
