@@ -354,3 +354,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionShow_message_triggered(self):
         Settings().show_msg = self.actionShow_message.isChecked()
+
+    @QtCore.pyqtSlot()
+    def on_actionHelp_triggered(self):
+        QtGui.QDesktopServices.openUrl(
+            QtCore.QUrl('http://time2pull.readthedocs.org/en/latest/'))
