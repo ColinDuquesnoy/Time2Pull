@@ -57,19 +57,19 @@ Installation
 ============
 
 Windows
--------
++++++++
 
 Use the windows installer available in the release section.
 
 
 Mac OSX
--------
++++++++
 
 Use the dmg installer available in the release section
 
 
 GNU/Linux
----------
++++++++++
 
 There is no binary packages for linux yet. *I won't make them myself but I am ready to help packagers who would like to volunteer, if any.*
 
