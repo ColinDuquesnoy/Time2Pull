@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This module helps manage overlayed icons.
 """
@@ -28,20 +29,14 @@ def get_status_icon(has_local_changes=False, status=RemoteStatus.up_to_date,
 
 
 def get_tray_icon(is_behind):
-    icons = {
-        TrayIconType.light: ':/time2pull/icons/git-light.png',
-        TrayIconType.dark: ':/time2pull/icons/git-dark.png'
-    }
-    base_icon = QtGui.QIcon(icons[Settings().tray_icon_type])
-    overlay_icon = QtGui.QIcon(':/time2pull/icons/Download.png')
     if is_behind:
-        icon_pixmap = base_icon.pixmap(QtCore.QSize(64, 64))
-        painter = QtGui.QPainter(icon_pixmap)
-        painter.drawPixmap(8, 8, overlay_icon.pixmap(48, 48))
-        painter.end()
-        return QtGui.QIcon(icon_pixmap)
+        return QtGui.QIcon(':/time2pull/icons/Download.png')
     else:
-        return base_icon
+        icons = {
+            TrayIconType.light: ':/time2pull/icons/Download-light.png',
+            TrayIconType.dark: ':/time2pull/icons/Download-dark.png'
+        }
+        return QtGui.QIcon(icons[Settings().tray_icon_type])
 
 
 if __name__ == '__main__':

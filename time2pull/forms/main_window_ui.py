@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'main_window.ui'
 #
-# Created: Wed Jun 11 23:23:43 2014
-#      by: PyQt5 UI code generator 5.2.1
+# Created: Sun Jun 15 22:38:00 2014
+#      by: PyQt5 UI code generator 5.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,9 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(539, 307)
+        MainWindow.resize(649, 548)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/time2pull/icons/git-light.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/time2pull/icons/Time2Pull.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -22,10 +22,6 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.labelRefresh = QtWidgets.QLabel(self.centralwidget)
-        self.labelRefresh.setText("")
-        self.labelRefresh.setObjectName("labelRefresh")
-        self.horizontalLayout.addWidget(self.labelRefresh)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonAdd = QtWidgets.QPushButton(self.centralwidget)
@@ -45,10 +41,37 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.pushButtonRefresh)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
-        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout, 3, 0, 1, 1)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setContentsMargins(0, -1, -1, -1)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.labelRefresh = QtWidgets.QLabel(self.centralwidget)
+        self.labelRefresh.setText("")
+        self.labelRefresh.setObjectName("labelRefresh")
+        self.verticalLayout.addWidget(self.labelRefresh)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem2)
+        self.horizontalLayout_3.addLayout(self.verticalLayout)
         self.listWidgetRepos = QtWidgets.QListWidget(self.centralwidget)
         self.listWidgetRepos.setObjectName("listWidgetRepos")
-        self.gridLayout.addWidget(self.listWidgetRepos, 0, 0, 1, 1)
+        self.horizontalLayout_3.addWidget(self.listWidgetRepos)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setContentsMargins(0, -1, -1, -1)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem3)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_2.addWidget(self.label_2)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_2)
+        self.gridLayout.addLayout(self.horizontalLayout_3, 2, 0, 1, 1)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionQuit = QtWidgets.QAction(MainWindow)
         icon = QtGui.QIcon.fromTheme("exit")
@@ -79,6 +102,13 @@ class Ui_MainWindow(object):
         self.actionHide_on_startup = QtWidgets.QAction(MainWindow)
         self.actionHide_on_startup.setCheckable(True)
         self.actionHide_on_startup.setObjectName("actionHide_on_startup")
+        self.actionShow_message = QtWidgets.QAction(MainWindow)
+        self.actionShow_message.setCheckable(True)
+        self.actionShow_message.setChecked(False)
+        self.actionShow_message.setObjectName("actionShow_message")
+        self.actionPlay_alert_sound = QtWidgets.QAction(MainWindow)
+        self.actionPlay_alert_sound.setCheckable(True)
+        self.actionPlay_alert_sound.setObjectName("actionPlay_alert_sound")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -89,6 +119,7 @@ class Ui_MainWindow(object):
         self.pushButtonAdd.setText(_translate("MainWindow", "Add "))
         self.pushButtonRemove.setText(_translate("MainWindow", "Remove"))
         self.pushButtonRefresh.setText(_translate("MainWindow", "Refresh"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><img src=\":/time2pull/icons/Time2Pull_banner.png\"/></p></body></html>"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
         self.actionAbout.setToolTip(_translate("MainWindow", "About Time2Pull"))
@@ -108,5 +139,9 @@ class Ui_MainWindow(object):
         self.actionHide_on_startup.setText(_translate("MainWindow", "Hide on startup"))
         self.actionHide_on_startup.setToolTip(_translate("MainWindow", "Hide the main window when the application starts."))
         self.actionHide_on_startup.setShortcut(_translate("MainWindow", "Ctrl+H"))
+        self.actionShow_message.setText(_translate("MainWindow", "Show message"))
+        self.actionShow_message.setToolTip(_translate("MainWindow", "Show/hide system tray messages"))
+        self.actionPlay_alert_sound.setText(_translate("MainWindow", "Play alert sound"))
+        self.actionPlay_alert_sound.setToolTip(_translate("MainWindow", "Enable/Disable alert sound"))
 
 from . import resources_rc

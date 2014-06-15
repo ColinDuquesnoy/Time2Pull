@@ -61,3 +61,5 @@ docs/_build/
 # Shinx build
 _build
 
+# Inno setup
+*.iss

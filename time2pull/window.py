@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This module contains the main window implementation.
 """
@@ -36,6 +37,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.worker_thread.finished.connect(self.on_refresh_finished)
         self.worker_thread.status_available.connect(self.on_status_available)
         # load repositories
+        self.load_repo_from_settings()# refresh ui
+        self.pushButtonRemove.setEnabled(
+            bool(len(self.listWidgetRepos.selectedItems())))
+        self.pushButtonRefresh.setEnabled(bool(self.listWidgetRepos.count()))
+        self.check_git()
+        # run status refresh
+        self.on_refresh_requested()
+
+    def check_git(self):
+        # check for git
+        if os.system('git --version') != 0:
+            self.show()
+            QtWidgets.QMessageBox.warning(
+                self, 'Git not found',
+                'Cannot find git, please add it to your PATH')
+            sys.exit(1)
+
+    def load_repo_from_settings(self):
         self.listWidgetRepos.clear()
         self.listWidgetRepos.setIconSize(QtCore.QSize(64, 64))
         settings = Settings()
@@ -45,24 +64,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             item.setIcon(get_status_icon())
             item.setData(QtCore.Qt.UserRole, (False, RemoteStatus.up_to_date))
             self.listWidgetRepos.addItem(item)
-        # refresh ui
-        self.pushButtonRemove.setEnabled(
-            bool(len(self.listWidgetRepos.selectedItems())))
-        self.pushButtonRefresh.setEnabled(bool(self.listWidgetRepos.count()))
-        # run status refresh
-        self.on_refresh_requested()
 
-        # check for git
-        if os.system('git --version') != 0:
-            self.show()
-            QtWidgets.QMessageBox.warning(
-                self, 'Git not found',
-                'Cannot find git, please add it to your PATH')
+    def restore_geometry_and_state(self):
+        s = Settings()
+        if s.geometry:
+            self.restoreGeometry(s.geometry)
+        if s.state:
+            self.restoreState(s.state)
 
     def setup_tray_icon_mnu(self):
         self.tray_icon_menu = QtWidgets.QMenu(self)
         self.tray_icon_menu.addAction(self.actionRestore)
         self.tray_icon_menu.addSeparator()
+        self.tray_icon_menu.addAction(self.actionAdd)
+        self.actionAdd.triggered.connect(self.on_pushButtonAdd_clicked)
+        self.tray_icon_menu.addAction(self.actionRefresh)
+        self.actionRefresh.triggered.connect(self.on_refresh_requested)
+        self.tray_icon_menu.addSeparator()
+        # Preferences
+        preferences = QtWidgets.QMenu('Preferences', self)
         self.actionIconGroup = QtWidgets.QActionGroup(self)
         self.actionIconGroup.triggered.connect(
             self.on_tray_icon_style_triggered)
@@ -77,22 +97,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         mnu = QtWidgets.QMenu(self)
         mnu.setTitle('Tray icon')
         mnu.addActions(self.actionIconGroup.actions())
-        self.tray_icon_menu.addMenu(mnu)
-        self.tray_icon_menu.addAction(self.actionHide_on_startup)
+        preferences.addMenu(mnu)
+        preferences.addAction(self.actionHide_on_startup)
         self.actionHide_on_startup.setChecked(Settings().hide_on_startup)
+        self.tray_icon_menu.addMenu(preferences)
+        preferences.addAction(self.actionPlay_alert_sound)
+        preferences.addAction(self.actionShow_message)
+        self.actionShow_message.setChecked(Settings().show_msg)
+        self.actionPlay_alert_sound.setChecked(Settings().play_sound)
         self.tray_icon_menu.addSeparator()
-        self.tray_icon_menu.addAction(self.actionAdd)
-        self.actionAdd.triggered.connect(self.on_pushButtonAdd_clicked)
-        self.tray_icon_menu.addAction(self.actionRefresh)
-        self.actionRefresh.triggered.connect(self.on_refresh_requested)
-        self.tray_icon_menu.addSeparator()
+
         self.tray_icon_menu.addAction(self.actionHelp)
         self.tray_icon_menu.addAction(self.actionAbout)
         self.actionHelp.setShortcut(QtGui.QKeySequence.HelpContents)
         self.tray_icon_menu.addSeparator()
         self.tray_icon_menu.addAction(self.actionQuit)
-        if sys.platform != 'darwin':
-            self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
+        self.actionQuit.setShortcut(QtGui.QKeySequence.Quit)
 
     def setup_tray_icon(self):
         self.setup_tray_icon_mnu()
@@ -127,9 +147,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # setup icons, try to use theme if possible
         self.setup_icons()
         # window properties
-        icon = QtGui.QIcon(':/time2pull/icons/git-light.png')
+        icon = QtGui.QIcon(':/time2pull/icons/Time2Pull.png')
         self.setWindowIcon(icon)
-        self.setWindowTitle("Time2Pull")
+        self.setWindowTitle("Time2Pull %s" % __version__)
         # refresh label movie
         self.movie = QtGui.QMovie(':/time2pull/icons/loader.gif')
         self.labelRefresh.setMovie(self.movie)
@@ -141,6 +161,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listWidgetRepos.itemSelectionChanged.connect(
             self.on_selection_changed)
         self.actionRestore.triggered.connect(self.restore)
+        self.restore_geometry_and_state()
 
     def closeEvent(self, event):
         if not self._quitting:
@@ -154,6 +175,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self._user_warned_about_tray = True
             self.hide()
             event.ignore()
+        # save geometry and state
+        s = Settings()
+        s.geometry = self.saveGeometry()
+        s.state = self.saveState()
 
     def _get_repositories_to_refresh(self):
         # maybe only the selected if there is a selection ? not sure it would
@@ -162,13 +187,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def on_refresh_requested(self):
+        self.tray_icon.setVisible(True)
         repos = self._get_repositories_to_refresh()
         if repos:
             self.timer.stop()
             self.pushButtonRefresh.setEnabled(False)
             self.pushButtonAdd.setEnabled(False)
             self.pushButtonRemove.setEnabled(False)
-            self.listWidgetRepos.setEnabled(False)
+            # self.listWidgetRepos.setEnabled(False)
             self.labelRefresh.setVisible(True)
             self.movie.start()
             self.worker_thread.set_repositories_to_refresh(repos)
@@ -221,26 +247,33 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_pushButtonRemove_clicked(self):
         repo = self.listWidgetRepos.currentItem().text()
-        self.listWidgetRepos.takeItem(self.listWidgetRepos.currentRow())
-        settings = Settings()
-        repos = settings.repositories
-        try:
-            repos.remove(repo)
-        except ValueError:
-            pass
-        settings.repositories = repos
+        answer = QtWidgets.QMessageBox.question(
+            self, 'Remove repository',
+            'Are you sure you want to remove repository: %s?' % repo)
+        if answer == QtWidgets.QMessageBox.Yes:
+            self.listWidgetRepos.takeItem(self.listWidgetRepos.currentRow())
+            settings = Settings()
+            repos = settings.repositories
+            try:
+                repos.remove(repo)
+            except ValueError:
+                pass
+            settings.repositories = repos
 
     @QtCore.pyqtSlot()
     def on_selection_changed(self):
         self.pushButtonRemove.setEnabled(
-            bool(len(self.listWidgetRepos.selectedItems())))
+            len(self.listWidgetRepos.selectedItems()) and
+            self.worker_thread.is_sleeping())
 
     def alert(self, repo):
-        repo_name = QtCore.QFileInfo(repo).fileName()
-        self.tray_icon.showMessage(
-            repo_name,
-            "Remote repository has been updated. It's time to pull!")
-        QtMultimedia.QSound.play(':/time2pull/sounds/sonar.wav')
+        if Settings().show_msg:
+            repo_name = QtCore.QFileInfo(repo).fileName()
+            self.tray_icon.showMessage(
+                repo_name,
+                "Remote repository has been updated. It's time to pull!")
+        if Settings().play_sound:
+            QtMultimedia.QSound.play(':/time2pull/sounds/sonar.wav')
 
     @QtCore.pyqtSlot(str, bool, object)
     def on_status_available(self, repo, dirty, remote_status):
@@ -251,8 +284,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 old_dirty_flg, old_remote_status = item.data(
                     QtCore.Qt.UserRole)
                 item.setData(QtCore.Qt.UserRole, (dirty, remote_status))
-                if(remote_status == RemoteStatus.behind and
-                        old_remote_status != RemoteStatus.behind):
+                if((remote_status == RemoteStatus.behind or remote_status == RemoteStatus.diverged) and
+                       (old_remote_status != RemoteStatus.behind and old_remote_status != RemoteStatus.diverged)):
                     self.alert(repo)
         self.update_tray_icon()
 
@@ -277,10 +310,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.restore()
 
     @QtCore.pyqtSlot()
+    @ensure_visible
     def on_actionAbout_triggered(self):
         QtWidgets.QMessageBox.about(
             self, 'About Time2Pull',
-            'Time2Pull is small application that monitors your local git '
+            'Time2Pull is a small application that monitors your local git '
             'repositories and warns you when a remote got updated.'
             '\n'
             '\n'
@@ -300,6 +334,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.update_tray_icon()
 
     def quit(self):
+        self.tray_icon.setVisible(False)
         self._quitting = True
         QtWidgets.QApplication.instance().quit()
 
@@ -311,3 +346,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @ensure_visible
     def on_actionRefresh_triggered(self):
         self.on_refresh_requested()
+
+    @QtCore.pyqtSlot()
+    def on_actionPlay_alert_sound_triggered(self):
+        Settings().play_sound = self.actionPlay_alert_sound.isChecked()
+
+    @QtCore.pyqtSlot()
+    def on_actionShow_message_triggered(self):
+        Settings().show_msg = self.actionShow_message.isChecked()
+
+    @QtCore.pyqtSlot()
+    def on_actionHelp_triggered(self):
+        QtGui.QDesktopServices.openUrl(
+            QtCore.QUrl('http://time2pull.readthedocs.org/en/latest/'))

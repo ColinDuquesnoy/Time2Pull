@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Time2Pull
+Comment=Get notified when your remote git repository got updated!
+Exec=Time2Pull
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/Time2Pull.png
+Categories=Development;

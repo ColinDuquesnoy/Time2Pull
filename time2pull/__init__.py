@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Time2Pull is a small application that monitor git repositories and notify you
 when the remote has changed and its time to pull.
@@ -10,10 +11,27 @@ repository and parse their output to detect the remote status::
     git status -uno
 
 Icons source:
+    - app icon : https://www.iconfinder.com/icons/126865/clock_loading_refresh_reload_slow_throbber_time_update_wait_waiting_icon#size=96
     - arrows: http://kyo-tux.deviantart.com/
     - database: http://www.icojoy.com
     - git: https://www.iconfinder.com/icons/83306/git_icon#size=32
 
 """
 
-__version__ = '1.0.0-beta'
+__version__ = '1.0'
+
+
+import sys
+from PyQt5 import QtWidgets
+from time2pull.window import MainWindow
+from time2pull.settings import Settings
+
+
+def main():
+    global app, win
+    app = QtWidgets.QApplication(sys.argv)
+    win = MainWindow()
+    if not Settings().hide_on_startup:
+        win.show()
+    app.exec_()
+

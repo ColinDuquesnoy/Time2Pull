@@ -1,5 +1,5 @@
-Time2Pull
-=========
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull_banner.png
 
 Time2Pull is small application that monitors your local git repositories and
 warns you when a remote got updated, i.e. *it's time to pull!*
@@ -14,7 +14,7 @@ How does it work?
 
 First, you add the paths to the local repositories you would like to monitor.
 
-Then, the application will scan your the added repositories every minutes to detect remote status changes.
+Then, the application will scan the added repositories every minutes to detect remote status changes.
 
 The scan simply consists in calling the two following git commands and parsing their output::
 
@@ -36,6 +36,19 @@ Features
 - nice and explicit icon overlays for each state
 - you can choose between a dark and a white tray icon for a better integration with your desktop
 
+Screenshots
+===========
+
+Main Window:
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
+    :align: center
+
+Overlays and their meanings:
+
+
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
+    :align: center
 
 License
 =======
@@ -101,16 +114,10 @@ Known issues
   view the tray icon.
 
 
-Screenshots
-===========
+Credits
+=======
 
-Main Window:
-
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2Pull.png
-    :align: center
-
-Overlays and their meanings:
-
-
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/doc/_static/Time2PullOverlays.png
-    :align: center
+- application icon: Céline Thiry <thiry.celi@gmail.com>
+- arrow down & up icons: http://kyo-tux.deviantart.com/
+- disk icon: http://www.icojoy.com
+- tango icon theme: http://tango.freedesktop.org/
