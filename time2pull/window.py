@@ -284,8 +284,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 old_dirty_flg, old_remote_status = item.data(
                     QtCore.Qt.UserRole)
                 item.setData(QtCore.Qt.UserRole, (dirty, remote_status))
-                if(remote_status == RemoteStatus.behind and
-                        old_remote_status != RemoteStatus.behind):
+                if((remote_status == RemoteStatus.behind or remote_status == RemoteStatus.diverged) and
+                       (old_remote_status != RemoteStatus.behind and old_remote_status != RemoteStatus.diverged)):
                     self.alert(repo)
         self.update_tray_icon()
 
