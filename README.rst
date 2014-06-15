@@ -1,4 +1,5 @@
-.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull.png
+.. image:: https://raw.githubusercontent.com/ColinDuquesnoy/Time2Pull/develop/time2pull/forms/icons/Time2Pull_banner.png
+
 Time2Pull
 =========
 
@@ -15,7 +16,7 @@ How does it work?
 
 First, you add the paths to the local repositories you would like to monitor.
 
-Then, the application will scan your the added repositories every minutes to detect remote status changes.
+Then, the application will scan the added repositories every minutes to detect remote status changes.
 
 The scan simply consists in calling the two following git commands and parsing their output::
 
