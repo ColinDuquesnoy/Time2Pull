@@ -23,7 +23,7 @@ osx = sys.platform == 'darwin'
 app_script = "Time2Pull.py"
 app_name = "Time2Pull"
 app_exe = "Time2Pull.exe" if windows else app_name
-app_icon = "time2pull/forms/icons/Time2Pull.ico" if windows else "time2pull/forms/icons/Time2Pull.icns"
+app_icon = "time2pull/forms/icons/Time2Pull.ico" if windows else None
 
 
 # Get App version
