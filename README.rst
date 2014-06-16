@@ -92,7 +92,7 @@ You will need to install from source (or from pypi).
 
 1) install dependencies using your distribution's package manager::
 
-    sudo apt-get install python3-pyqt5 git
+    sudo apt-get install python3-pyqt5 git qt5-multimedia
 
 
 2) install the package, using pip for python3::
@@ -121,3 +121,23 @@ Credits
 - arrow down & up icons: http://kyo-tux.deviantart.com/
 - disk icon: http://www.icojoy.com
 - tango icon theme: http://tango.freedesktop.org/
+
+
+Changelog
+=========
+
+1.0.2
+-----
+Fixed bugs
+    - fix pip installation due to missing files in source distribution.
+
+1.0.1
+-----
+
+Fixed bugs:
+    - fix version number in python package.
+
+1.0.0
+-----
+
+First public release.

@@ -111,6 +111,26 @@ Credits
 - tango icon theme: http://tango.freedesktop.org/
 
 
+Changelog
+=========
+
+1.0.2
+-----
+Fixed bugs
+    - fix pip installation due to missing files in source distribution.
+
+1.0.1
+-----
+
+Fixed bugs:
+    - fix version number in python package.
+
+1.0.0
+-----
+
+First public release.
+
+
 Known issues
 ============
 
