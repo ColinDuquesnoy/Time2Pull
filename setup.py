@@ -16,7 +16,7 @@ def read_version():
         lines = f.read().splitlines()
         for l in lines:
             if "__version__" in l:
-                return l.split("=")[1].strip().replace('"', "")
+                return l.split("=")[1].strip().replace('"', "").replace("'", '')
 
 
 def run_as_root():
@@ -54,7 +54,7 @@ setup(
     long_description=long_desc,
     zip_safe=False,
     install_requires=requirements,
-    entry_points={'gui_scripts': ['Time2Pull = time2pull:main']},
+    entry_points={'gui_scripts': ['Time2Pull = time2pull.app:main']},
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: X11 Applications :: Qt',
