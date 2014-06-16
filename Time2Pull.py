@@ -9,8 +9,8 @@ The application starts in the system tray. Right clicking on the icon brings
 a context menu that let you add new repositories and show the main window.
 
 """
-from time2pull import main
+from time2pull import app
 
 
 if __name__ == '__main__':
-    main()
+    app.main()

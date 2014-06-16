@@ -54,7 +54,7 @@ setup(
     long_description=long_desc,
     zip_safe=False,
     install_requires=requirements,
-    entry_points={'gui_scripts': ['Time2Pull = time2pull:main']},
+    entry_points={'gui_scripts': ['Time2Pull = time2pull.app:main']},
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: X11 Applications :: Qt',
