@@ -66,6 +66,7 @@ if windows:
           "#####################################################################\n")
     try:
         build_dir = glob.glob("build/*")[0]
+        # configure setup.iss with the correct version and build directory.
         with open("setup.iss.in", "r") as src, open("setup.iss", "w") as dst:
             lines = src.readlines()
             data = []
@@ -74,6 +75,10 @@ if windows:
                 l = l.replace("@BUILD_DIR@", build_dir)
                 data.append(l)
             dst.writelines(data)
+        # copy
+        import PyQt5
+        shutil.copy(os.path.join(os.path.dirname(PyQt5.__file__), "libEGL.dll"), build_dir)
+        os.environ["PATH"] += ';C:\Program Files (x86)\Inno Setup 5'
         os.system("iscc %s" % os.path.join(os.getcwd(), "setup.iss"))
     except Exception as e:
         print(e)
